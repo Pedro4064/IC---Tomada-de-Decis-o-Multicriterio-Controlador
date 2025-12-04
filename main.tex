@@ -173,12 +173,37 @@ outranking, como ELECTRE e PROMETHEE, também desempenham papel importante ao pe
 \cite{roy1991electre,brans1985promethee}. Além disso, abordagens baseadas em programação multiobjetivo oferecem uma formulação matemática mais ampla para problemas com múltiplos objetivos conflitantes
 \cite{miettinen1999multiobjective}.
 
+Considerando esse contexto, propõe-se neste trabalho a aplicação de métodos de decisão multicritério para apoiar a escolha do controlador mais adequado para um sistema CNC de dois eixos. Para isso,
+utilizam-se os métodos CRITIC, para determinação objetiva dos pesos dos critérios de desempenho, e TOPSIS, para classificação das alternativas com base na proximidade da solução ideal, permitindo
+avaliar controladores distintos de forma sistemática e quantitativa. A análise é conduzida a partir de um modelo dinâmico dos eixos X e Y desenvolvido em Simulink, no qual diversos critérios são
+extraídos, possibilitando uma comparação abrangente entre as opções de controladores estudadas.
 
 
-\section{Objetivo}
+\section{Objetivos}
+Propõe-se neste trabalho a análise multicriterial dos controladores candidatos para a CNC utilizando os métodos CRITIC e TOPSIS, de forma a determinar, de maneira quantitativa e objetiva, qual
+controlador apresenta o melhor desempenho global para o sistema dinâmico de dois eixos. Para tal, serão realizadas as seguintes etapas:
 
+\begin{itemize}
+    \item A modelagem em Simulink do sistema dinâmico da máquina CNC.
+    \item A obtenção dos critérios de desempenho dos controladores avaliados, incluindo 14 métricas (7 para o eixo X e 7 para o eixo Y).
+    \item A análise dos critérios de resposta ao degrau, tais como Rise Time, Transient Time, Settling Time, Overshoot e Peak Time.
+    \item A avaliação de critérios relacionados ao seguimento de trajetória, como Integral Absolute Error (IAE) e Integral no Tempo da Tensão (ITV).
+    \item A aplicação do método CRITIC para determinação dos pesos objetivos dos critérios, considerando suas correlações e contrastes.
+    \item A utilização do método TOPSIS para ranqueamento das alternativas de controladores, identificando qual delas se aproxima mais da solução ideal e melhor atende às exigências do sistema.
+\end{itemize}
 
+\newpage
 \section{Metodologia}
+Nesta seção são apresentadas as etapas necessárias para identificar o sistema a partir da sua resposta ao degrau, o modelo simulink usado de base para as simulações e o tuning dos controladores PI,
+PID e LQR.
+
+\subsection{Modelagem Do Sistema}
+A fim de obtermos um modelo dinâmico do sistema, foi utilizada a resposta ao degrau obtida por Martin Jurek \cite{JurekWagnerova2019} e o processo de identificação de um sistema de 
+segunda ordem 
+\subsection{Controlador PI}
+\subsection{Controlador PID}
+\subsection{Controlador LQR}
+
 \section{Conclusão}
 
 \newpage
