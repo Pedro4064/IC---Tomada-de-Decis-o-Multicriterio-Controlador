@@ -252,36 +252,63 @@ onde:
 \clearpage
 \subsection{Controlador PI}
 Após implementar o conjunto de equações de transferências que compõe o sistema motor, belt e massa para cada eixo em subsistemas do simulink (dada pela figura \ref{fig:simulink_massa_belt_motor}), onde tem como 
-entrada a saída do controlador $PI$, foram obtidos os valores expressos na tabela \ref{tab:pi_gains}, a partir do tuning baseado em função de transferência incluido no \emph{control toolbox} do
+entrada a saída do controlador $PI$, foram obtidos os valores $K_p = 1781.269$ e $K_i=0.094$ para o eixo X, e $K_p=1859.321$ e $K_i=0.098$ para o eixo Y, a partir do tuning baseado em função de transferência incluido no \emph{control toolbox} do
 MATLAB.
 
 \vspace{10px}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{img/simulink_motor_belt_massa.png}
+    \includegraphics[width=0.8\textwidth]{img/simulink_motor_belt_massa.png}
     \caption{Simulink - Subsistema Motor, Massa e Belt}
     \label{fig:simulink_massa_belt_motor}
 \end{figure}
 \vspace{10px}
 
+A partir dessa configuração do sistema, foram feitos dois testes e coletados os dados de posição esperada, posição real e esforço do atuador tanto para o eixo X quanto para o eixo
+Y para a resposta ao degrau e perfil trapezoidal  de velocidade em uma trajetória diagonal para cada um dos eixos, que podem ser observados nas figuras \ref{fig:pi_x_step} e \ref{fig:pi_y_step} para a resposta 
+ao degrau e \ref{fig:pi_x_diag} e \ref{fig:pi_y_diag} para resposta a uma trajetória diagonal.
 
-\vspace{10px}
-\begin{table}[h]
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
         \centering
-        \begin{tabular}{lcc}
-            \hline
-            \hline
-            &Eixo X & Eixo Y \\ 
-            \hline
-            $K_p$ & 1781.269 & 1859.321\\
-            $K_i$ & 0.094& 0.098\\
-            \hline
-        \end{tabular}
-        \caption{Valores dos Ganhos - Controlador PI}
-        \label{tab:pi_gains}
-\end{table}
+        \includegraphics[width=\textwidth]{img/pi_diag_x.jpg}
+        \caption{Eixo X}
+        \label{fig:pi_x_diag}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pi_diag_y.jpg}
+        \caption{Eixo Y}
+        \label{fig:pi_y_diag}
+    \end{subfigure}
+    \caption{Controlador PI - Perfil Trapezoidal}
+    \label{fig:pi_diag}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pi_step_x.jpg}
+        \caption{Eixo X}
+        \label{fig:pi_x_step}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pi_step_y.jpg}
+        \caption{Eixo Y}
+        \label{fig:pi_y_step}
+    \end{subfigure}
+    \caption{Controlador PI - Resposta ao Degrau}
+    \label{fig:pi_step}
+\end{figure}
 
 
+\clearpage
 \subsection{Controlador PID}
 \subsection{Controlador LQR}
 \subsection{Método CRITIC}
