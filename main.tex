@@ -310,6 +310,77 @@ ao degrau e \ref{fig:pi_x_diag} e \ref{fig:pi_y_diag} para resposta a uma trajet
 
 \clearpage
 \subsection{Controlador PID}
+De forma análogo a como foi realizado para o controlador PI, foi utilizado a função de tuning baseado 
+em função de transferência do \emph{control toolbox} para definir os valores dos ganhos dos controladores PID, resultando nos valores 
+apresentados na tabela \ref{tab:pid_gains}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \hline
+        &Eixo X&Eixo Y\\
+        \hline
+        $K_p$&1216.55&1235.48\\
+        $K_i$&0.71&0.60\\
+        $K_d$&0.08&0.05\\
+        \hline
+        \hline
+    \end{tabular}
+    \caption{Ganhos - Controlador PID}
+    \label{tab:pid_gains}
+\end{table}
+\vspace{10px}
+
+A partir desses valores, foram realizados os testes de resposta ao degrau e diagonal, como demonstrado pelas figuras \ref{fig:pid_diag} e \ref{fig:pid_step}.
+
+\vspace{10px}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pid_diag_x.jpg}
+        \caption{Eixo X}
+        \label{fig:pid_x_diag}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pid_diag_y.jpg}
+        \caption{Eixo Y}
+        \label{fig:pid_y_diag}
+    \end{subfigure}
+    \caption{Controlador PID - Perfil Trapezoidal}
+    \label{fig:pid_diag}
+\end{figure}
+
+\vspace{10px}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pid_step_x.jpg}
+        \caption{Eixo X}
+        \label{fig:pid_x_step}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/pid_step_y.jpg}
+        \caption{Eixo Y}
+        \label{fig:pid_y_step}
+    \end{subfigure}
+    \caption{Controlador PID - Resposta ao Degrau}
+    \label{fig:pid_step}
+\end{figure}
+
+
+
+
+
+
+
+
 \subsection{Controlador LQR}
 \subsection{Método CRITIC}
 \subsection{Método TOPSIS}
