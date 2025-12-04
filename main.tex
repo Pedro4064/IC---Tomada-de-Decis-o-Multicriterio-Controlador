@@ -193,7 +193,7 @@ controlador apresenta o melhor desempenho global para o sistema dinâmico de doi
 \end{itemize}
 
 \newpage
-\section{Metodologia}
+\section{Metodologia e Simulações}
 Nesta seção são apresentadas as etapas necessárias para identificar o sistema a partir da sua resposta ao degrau, o modelo simulink usado de base para as simulações e o tuning dos controladores PI,
 PID e LQR.
 
@@ -236,6 +236,7 @@ parâmetros obtidos a partir do datasheet de um motor comercial \cite{Foneacc_37
 
 \begin{align}
     P(s) = \frac{K}{(Js+b)(Ls+R) + K^2},
+    \label{eq:mod_motor}
 \end{align}
 onde:
 
@@ -248,7 +249,39 @@ onde:
 \end{itemize}
 
 
+\clearpage
 \subsection{Controlador PI}
+Após implementar o conjunto de equações de transferências que compõe o sistema motor, belt e massa para cada eixo em subsistemas do simulink (dada pela figura \ref{fig:simulink_massa_belt_motor}), onde tem como 
+entrada a saída do controlador $PI$, foram obtidos os valores expressos na tabela \ref{tab:pi_gains}, a partir do tuning baseado em função de transferência incluido no \emph{control toolbox} do
+MATLAB.
+
+\vspace{10px}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{img/simulink_motor_belt_massa.png}
+    \caption{Simulink - Subsistema Motor, Massa e Belt}
+    \label{fig:simulink_massa_belt_motor}
+\end{figure}
+\vspace{10px}
+
+
+\vspace{10px}
+\begin{table}[h]
+        \centering
+        \begin{tabular}{lcc}
+            \hline
+            \hline
+            &Eixo X & Eixo Y \\ 
+            \hline
+            $K_p$ & 1781.269 & 1859.321\\
+            $K_i$ & 0.094& 0.098\\
+            \hline
+        \end{tabular}
+        \caption{Valores dos Ganhos - Controlador PI}
+        \label{tab:pi_gains}
+\end{table}
+
+
 \subsection{Controlador PID}
 \subsection{Controlador LQR}
 \subsection{Método CRITIC}
