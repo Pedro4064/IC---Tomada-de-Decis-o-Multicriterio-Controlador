@@ -231,10 +231,28 @@ Com isso, em conjunto com o período entre oscilações $T_0$, obtemos o valor d
     \omega_n = \frac{2\pi}{T_0\sqrt{1 - \xi^2}} = 699.09
 \end{align}
 
+Já para a modelagem do motor, foi utilizado o modelo de um motor DC \cite{CTMS_MotorSpeed_SystemModeling}, dada pela equação \ref{eq:mod_motor}, sendo os 
+parâmetros obtidos a partir do datasheet de um motor comercial \cite{Foneacc_37GB-555}.
+
+\begin{align}
+    P(s) = \frac{K}{(Js+b)(Ls+R) + K^2},
+\end{align}
+onde:
+
+\begin{itemize}
+    \item $K$: Representa a constante de torque e emf;
+    \item $J$: Momento de inércia do rotor;
+    \item $b$: Constante de viscosidade;
+    \item $R$: Resistência elétrica do estator;
+    \item $L$: Indutância elétrica do estator.
+\end{itemize}
+
 
 \subsection{Controlador PI}
 \subsection{Controlador PID}
 \subsection{Controlador LQR}
+\subsection{Método CRITIC}
+\subsection{Método TOPSIS}
 
 \section{Conclusão}
 
