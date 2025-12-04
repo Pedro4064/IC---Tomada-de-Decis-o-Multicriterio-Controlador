@@ -197,9 +197,41 @@ controlador apresenta o melhor desempenho global para o sistema dinâmico de doi
 Nesta seção são apresentadas as etapas necessárias para identificar o sistema a partir da sua resposta ao degrau, o modelo simulink usado de base para as simulações e o tuning dos controladores PI,
 PID e LQR.
 
-\subsection{Modelagem Do Sistema}
-A fim de obtermos um modelo dinâmico do sistema, foi utilizada a resposta ao degrau obtida por Martin Jurek \cite{JurekWagnerova2019} e o processo de identificação de um sistema de 
-segunda ordem 
+\subsection{Identificação e Modelagem Do Sistema}
+A fim de obtermos um modelo dinâmico do sistema, foi utilizada a resposta ao degrau obtida por Martin Jurek \cite{JurekWagnerova2019} do eixo x (belt + massa) de uma CNC de dois eixos e o processo de identificação de um sistema de 
+segunda ordem a partir da sua resposta descrita em \cite{Busoniu2018}, que tem a função de transferência descrita pela equação \ref{eq:sec_order_sys}.
+\begin{align}
+    H(s) = K\frac{\omega_n^2}{s^2 + 2\xi\omega_n s + \omega_n^2 },
+    \label{eq:sec_order_sys}
+\end{align}
+onde: 
+\begin{itemize}
+    \item $K$: Representa o ganho estático do sistema;
+    \item $\omega_n$: Representa a frequência natural do sistema;
+    \item $\xi$: Representa a razão de amortecimento do sistema.
+\end{itemize}
+
+O primeiro passo para a identificação é a determinar o valor em estado estacionário posterior a todas as oscilações, denominado de $y_{ss}$, sendo igual ao ganho $K$ para sistemas partindo do zero:
+\begin{align}
+    y_{ss} = K = 0.05 \times 10^{-3}.
+\end{align}
+
+A partir desse valor, é possível determinar o máximo overshoot $M$:
+\begin{align}
+    M = \frac{y_{pico} - y_{ss}}{y_{ss}},
+\end{align}
+que por sua vez  é utilizado para determinar o fator de amortecimento:
+
+\begin{align}
+    \xi = \frac{\log 1/M}{\sqrt{\pi^2 + \log^2 M}} =  0.4384.
+\end{align}
+
+Com isso, em conjunto com o período entre oscilações $T_0$, obtemos o valor da frequência natural para o eixo $x$:
+\begin{align}
+    \omega_n = \frac{2\pi}{T_0\sqrt{1 - \xi^2}} = 699.09
+\end{align}
+
+
 \subsection{Controlador PI}
 \subsection{Controlador PID}
 \subsection{Controlador LQR}
