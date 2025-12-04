@@ -375,13 +375,52 @@ A partir desses valores, foram realizados os testes de resposta ao degrau e diag
 \end{figure}
 
 
-
-
-
-
-
-
+\newpage
 \subsection{Controlador LQR}
+Para o controlador LQR, foi estipulado uma grande penalidade para o desvio do estados $x$ e $y$ em relação aos 
+valores de referência, resultando nos valores de $2\times 10^6$ nos respectivos locais na matriz $Q$. 
+Já no que tange penalização sobre esforço de controle, como não é um sistema móvel onde há a necessidade de uma 
+grande autonomia utilizando baterias, foi considerado $R=0.1$.
+
+A partir do ganho $K$ obtido, foi então encontrado os comportamentos observados pelas figuras \ref{fig:lqr_diag} e \ref{fig:lqr_step}.
+
+\vspace{10px}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/lqr_diag_x.jpg}
+        \caption{Eixo X}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/lqr_diag_y.jpg}
+        \caption{Eixo Y}
+    \end{subfigure}
+    \caption{Controlador LQR - Perfil Trapezoidal}
+    \label{fig:lqr_diag}
+\end{figure}
+
+\vspace{15px}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/lqr_step_x.jpg}
+        \caption{Eixo X}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/lqr_step_y.jpg}
+        \caption{Eixo Y}
+    \end{subfigure}
+    \caption{Controlador LQR - Resposta ao Degrau}
+    \label{fig:lqr_step}
+\end{figure}
+
+\newpage
 \subsection{Método CRITIC}
 \subsection{Método TOPSIS}
 
