@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\title{Relatório Final - IC}
+\author{}
+
+\usepackage[margin=0.8in]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{tabularx} % in the preamble
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{cancel}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{xcolor}
+
+\usepackage{mathtools}  % loads »amsmath«
+\newtagform{brackets}{[}{]}
+\usetagform{brackets}
+
+% Create a Todo list
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\renewcommand{\figurename}{Figura}
+
+% Fix vspace inside wrapfigure
+\setlength\intextsep{0pt}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\captionsetup[lstlisting]{skip=10pt}
+
+% Create a new command to be used in the align environment in multiple line equations do only the last equation is numbered  
+\newcommand{\n}{\nonumber \\ }
+\makeatletter
+\let\inserttitle\@title
+\makeatother
+% Set the style of the page 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Relatório Final - IC \\ Pedro Henrique L. da Cruz \vspace{1px}}
+\lhead{UNICAMP \\ Faculdade de Engenharia Mecânica\vspace{1px}}
+\rfoot{Page \thepage}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=file,
+    urlcolor=black,
+    citecolor=black
+}
+
+\usepackage{biblatex}
+\addbibresource{biblography.bib}
+
+\renewcommand*\contentsname{Sumário}
+\lstdefinestyle{cStyle}{
+    language=c,       % Linguagem para destacar CMake
+    basicstyle=\ttfamily\footnotesize, % fonte monoespaçada menor
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    tabsize=4,
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,                 % coloca uma borda ao redor
+    backgroundcolor=\color{gray!10}, % fundo levemente cinza
+    captionpos=b
+}
+
+\lstdefinestyle{cmakeStyle}{
+    language=sh,       % Linguagem para destacar CMake
+    basicstyle=\ttfamily\footnotesize, % fonte monoespaçada menor
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    tabsize=4,
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,                 % coloca uma borda ao redor
+    backgroundcolor=\color{gray!10}, % fundo levemente cinza
+    captionpos=b
+}
+
+% Begin the Document 
+\begin{document}
+
+    \thispagestyle{empty}
+    \begin{center}
+    
+        \begin{minipage}{0.12\textwidth}
+            \includegraphics[width=1.5cm]{img/UNICAMP_logo.png} 
+        \end{minipage}
+        \begin{minipage}{0.50\textwidth}
+            \begin{center}
+                \textbf{Universidade Estadual de Campinas - UNICAMP} \\
+                \textbf{Faculdade de Engenharia Mecânica - FEM}
+            \end{center}
+        \end{minipage}
+        \begin{minipage}{0.15\textwidth}
+            \hspace{15px}
+            \includegraphics[width=1.5cm]{img/fem_logo.png} \\
+        \end{minipage}
+        
+    \end{center}
+
+% Title
+\vspace{2cm}
+\begin{center}
+    \textbf{Utilização De Métodos de Tomada de Decisão Multi-Critério na Escolha de Controladores}
+\end{center}
+
+% Subtitle
+\vspace{1cm}
+\begin{center}
+    \textbf{Relatório Final - Iniciação Científica}
+\end{center}
+
+% Supervisor and student
+\vspace{2cm}
+\begin{center}
+    \begin{tabular}{l l}
+        Orientador: & Prof. Dr. Tiago Henrique Machado \\
+        E-mail: & tiagomh@fem.unicamp.br \\
+        Aluno: & Pedro Henrique Limeira da Cruz \\
+        E-mail: & p215663@dac.unicamp.br
+    \end{tabular}
+\end{center}
+
+% Date
+\vfill{}
+\begin{center}
+    Campinas, 06 de Dezembro de 2025.
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+\section{Introdução}
+A escolha do controlador mais adequado para um sistema dinâmico depende de diversos critérios de desempenho que nem sempre apontam todos na mesma direção.
+Aspectos como estabilidade, tempo de acomodação, sobre-sinal, erro em regime permanente, esforço de controle, robustez e até a complexidade de implementação influenciam de maneiras diferentes a
+adequação de cada técnica de controle. Assim, a decisão não pode ser reduzida a um único indicador, exigindo uma visão holística que considere simultaneamente fatores técnicos e operacionais.
+
+A análise multicritério surge justamente como uma abordagem capaz de organizar essa complexidade ao fornecer métodos estruturados para avaliar alternativas segundo múltiplos critérios. Em vez de
+privilegiar um único indicador ou depender exclusivamente da intuição do projetista, os métodos de decisão multicritério permitem explicitar critérios relevantes, ponderar suas contribuições relativas
+e revelar trade-offs que, muitas vezes, não são evidentes na avaliação isolada de cada indicador de desempenho. Com isso, o processo decisório torna-se mais transparente, reprodutível e melhor
+fundamentado, especialmente em cenários onde diversas alternativas apresentam qualidades complementares.
+
+A literatura de tomada de decisão multicritério mostra que diferentes métodos foram desenvolvidos para lidar com a natureza multidimensional e, muitas vezes, conflitante dos critérios envolvidos. Uma
+distinção fundamental é entre métodos compensatórios, nos quais um bom desempenho em um critério pode compensar um desempenho inferior em outro, e métodos não compensatórios, que impõem limites
+rígidos e evitam compensações excessivas \cite{belton2002mcda,triantaphyllou2000mcdm}. Outra categoria amplamente discutida é a dos métodos de ponderação objetiva, que atribuem
+pesos com base em propriedades estatísticas dos dados, como variabilidade e contraste entre critérios, sendo o método CRITIC um dos exemplos mais conhecidos \cite{diakoulaki1995critic}. Métodos
+outranking, como ELECTRE e PROMETHEE, também desempenham papel importante ao permitir comparações parciais entre alternativas por meio de relações de dominância
+\cite{roy1991electre,brans1985promethee}. Além disso, abordagens baseadas em programação multiobjetivo oferecem uma formulação matemática mais ampla para problemas com múltiplos objetivos conflitantes
+\cite{miettinen1999multiobjective}.
+
+
+
+\section{Objetivo}
+
+
+\section{Metodologia}
+\section{Conclusão}
+
+\newpage
+\printbibliography[title={Referências}]
+
+\end{document}
