@@ -384,7 +384,7 @@ grande autonomia utilizando baterias, foi considerado $R=0.1$.
 
 A partir do ganho $K$ obtido, foi então encontrado os comportamentos observados pelas figuras \ref{fig:lqr_diag} e \ref{fig:lqr_step}.
 
-\vspace{10px}
+\vspace{5px}
 \begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.47\textwidth}
@@ -402,7 +402,7 @@ A partir do ganho $K$ obtido, foi então encontrado os comportamentos observados
     \label{fig:lqr_diag}
 \end{figure}
 
-\vspace{15px}
+\vspace{5px}
 \begin{figure}[h!]
     \centering
     \begin{subfigure}[b]{0.47\textwidth}
@@ -420,8 +420,66 @@ A partir do ganho $K$ obtido, foi então encontrado os comportamentos observados
     \label{fig:lqr_step}
 \end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.9\textwidth]{img/dados_brutos.png}
+    \caption{Dados Brutos de Desempenho}
+\end{figure}
+
 \newpage
 \subsection{Método CRITIC}
+Como citado anteriormente, o método \textit{CRITIC} (\textit{Criteria Importance Through Intercriteria Correlation}) é uma técnica objetiva para a determinação de pesos em problemas de decisão multicritério. Diferentemente de
+métodos subjetivos, o CRITIC utiliza apenas informações presentes nos dados, considerando simultaneamente o contraste (\emph{i.e.} variabilidade) de cada critério e o conflito (\emph{i.e.} correlação) entre
+eles. Dessa forma, critérios com alta capacidade de discriminação e baixa redundância recebem maior peso. O método tem sido amplamente aplicado em avaliação de desempenho, otimização e em contextos
+que demandam atribuição objetiva de pesos.
+
+
+Os passos do método CRITIC podem ser descritos da seguinte forma:
+
+\begin{enumerate}
+    \item \textbf{Normalização dos dados}: os valores de cada critério são normalizados, geralmente por meio da normalização min--max, permitindo a comparação direta entre critérios com diferentes
+    escalas e unidades.
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.9\textwidth]{img/dados_normalizados.png}
+        \caption{Dados Normalizados de Desempenho}
+    \end{figure}
+
+    \item \textbf{Cálculo da medida de contraste}: para cada critério, calcula-se o desvio padrão, que expressa sua capacidade de discriminar entre as alternativas. Critérios com maior variabilidade possuem maior poder de diferenciação.
+
+    \item \textbf{Estimativa do conflito entre critérios}: calcula-se a matriz de correlação entre os critérios, de forma a identificar redundâncias. Critérios altamente correlacionados compartilham
+    informação semelhante e, portanto, devem receber menor peso relativo.
+    
+    \vspace{5px}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.9\textwidth]{img/matriz_de_correlacao.png}
+        \caption{Matriz de Correlação Entre Parâmetros}
+    \end{figure}
+    \vspace{5px}
+
+    \item \textbf{Cálculo da quantidade de informação}: para cada critério $j$, determina-se a quantidade de informação combinando contraste e conflito, dada por
+        \begin{align}
+            I_j = \sigma_j \sum_{k=1}^{n} (1 - r_{jk}),
+        \end{align}
+    onde $\sigma_j$ é o desvio padrão e $r_{jk}$ é a correlação entre os critérios $j$ e $k$.
+
+    \item \textbf{Determinação dos pesos finais}: os pesos finais são obtidos pela normalização de $I_j$, de forma que
+        \begin{align}
+            w_j = \frac{I_j}{\sum_{j=1}^{n} I_j}.
+        \end{align}
+    Esses pesos refletem a importância relativa de cada critério, levando em consideração tanto a variabilidade quanto a não-redundância.
+\end{enumerate}
+\newpage
+\vspace{25px}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/matriz_quantidade_info_e_pesos.png}
+    \caption{Matriz de Quantidade de Informação e Pesos Finais Por Critério}
+\end{figure}
+\vspace{5px}
+
+\clearpage
 \subsection{Método TOPSIS}
 
 \section{Conclusão}
