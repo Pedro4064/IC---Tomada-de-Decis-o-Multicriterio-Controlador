@@ -442,7 +442,7 @@ Os passos do método CRITIC podem ser descritos da seguinte forma:
     \begin{figure}[h!]
         \centering
         \includegraphics[width=.9\textwidth]{img/dados_normalizados.png}
-        \caption{Dados Normalizados de Desempenho}
+        \caption{Dados Normalizados de Desempenho - CRITIC}
     \end{figure}
 
     \item \textbf{Cálculo da medida de contraste}: para cada critério, calcula-se o desvio padrão, que expressa sua capacidade de discriminar entre as alternativas. Critérios com maior variabilidade possuem maior poder de diferenciação.
@@ -481,6 +481,85 @@ Os passos do método CRITIC podem ser descritos da seguinte forma:
 
 \clearpage
 \subsection{Método TOPSIS}
+
+O método TOPSIS (\textit{Technique for Order Preference by Similarity to the Ideal Solution}), é amplamente utilizado em problemas de decisão multicritério. Seu princípio fundamental estabelece que a
+melhor alternativa deve ser simultaneamente a mais próxima da solução ideal (melhores valores possíveis) e a mais distante da solução anti-ideal (piores valores). Dessa forma, o método permite
+comparar alternativas considerando múltiplos critérios, pesos e direções de otimização.
+
+
+O procedimento do TOPSIS pode ser descrito em cinco etapas principais:
+
+\begin{enumerate}
+    \item \textbf{Normalização da matriz de decisão}:  
+    Os valores de cada critério são normalizados pela normalização vetorial:
+    \begin{align}
+        r_{ij} &= \frac{x_{ij}}{\sqrt{\sum_{i=1}^{m} x_{ij}^2}} .
+    \end{align}
+
+    \vspace{5px}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.9\textwidth]{img/topsis_norm.png}
+        \caption{Dados Normalizados de Desempenho - TOPSIS}
+    \end{figure}
+    \vspace{5px}
+
+    \item \textbf{Construção da matriz ponderada}:  
+    Cada critério é multiplicado pelo peso \( w_j \) obtidos pelo método CRITIC, resultando:
+    \vspace{5px}
+    \begin{align}
+        v_{ij} &= w_j \, r_{ij}.
+    \end{align}
+    \vspace{5px}
+
+    \item \textbf{Determinação das soluções ideal e anti-ideal}:  
+    A solução ideal positiva (SIP) e a solução ideal negativa (SIN) são definidas como:
+    \vspace{5px}
+    \begin{align}
+        v_j^+ &= \min_i (v_{ij}), \\
+        v_j^- &= \max_i (v_{ij}),
+    \end{align}
+    \vspace{5px}
+    considerando que quanto menor o rise time, overshoot, etc, melhor o desempenho do controlador.
+    \vspace{5px}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.9\textwidth]{img/topsis_ins_ips.png}
+        \caption{Dados Com Pesos e Soluções Ideais por Parâmetro - TOPSIS}
+    \end{figure}
+    \vspace{5px}
+
+    \newpage
+    \item \textbf{Cálculo das distâncias às soluções}:  
+    Para cada alternativa \(i\), calculam-se as distâncias euclidianas:
+    \vspace{5px}
+    \begin{align}
+        D_i^+ &= \sqrt{\sum_{j=1}^{n} (v_{ij} - v_j^+)^2}, \\
+        D_i^- &= \sqrt{\sum_{j=1}^{n} (v_{ij} - v_j^-)^2}.
+    \end{align}
+    \vspace{5px}
+
+    \item \textbf{Cálculo do coeficiente de proximidade relativa}:  
+    A prioridade de cada alternativa é dada por:
+    \vspace{5px}
+    \begin{align}
+        C_i &= \frac{D_i^-}{D_i^+ + D_i^-},
+    \end{align}
+    \vspace{5px}
+    onde valores mais próximos de 1 indicam alternativas mais desejáveis.
+    \vspace{5px}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.7\textwidth]{img/topsis_result.png}
+        \caption{Distâncias e Resultado Final - TOPSIS}
+        \label{fig:topsis_results}
+    \end{figure}
+    \vspace{5px}
+\end{enumerate}
+
+Com os resultados obtidos na figura \ref{fig:topsis_results}, pode-se observar que o controlador LQR foi o que mais se aproximou do que
+seria considerado a solução ideal, enquanto o controlador PID se aproximou mais da solução negativa (\emph{i.e.} da pior solução).
+
 
 \section{Conclusão}
 
